@@ -20,3 +20,6 @@ replace with your computer name, and proper network interface `ens7`.
 3. sudo vim /etc/shells, and add `/home/YOUR_USER_NAME/.nix-profile/bin/zsh` to the end.
 4. chsh
 5. Enter `/home/YOUR_USER_NAME/.nix-profile/bin/zsh`, and log out.
+
+### TODO
+1. VSCode. Put some settings in `/home/YOUR_USER_NAME/.vscode-server/data/Machine/settings.json`

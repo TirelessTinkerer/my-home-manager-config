@@ -153,6 +153,7 @@
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    defaultKeymap = "emacs";
     initExtra = ''
     ### (work) Use shared storage to try and download pre-compiled object
     export DRIVING_BAZEL_REMOTE_CACHE=s3
@@ -189,6 +190,7 @@
       g="git";
       gs="git status";
       gls="git log --stat --all";
+      gd="git diff";
       vim="nvim";
       vi="nvim";
     };
