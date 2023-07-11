@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "zhiyuan-li";
-  home.homeDirectory = "/home/zhiyuan-li";
+  home.username = "zyli";
+  home.homeDirectory = "/home/zyli";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -36,8 +36,9 @@
     # '')
     pkgs.ripgrep
     pkgs.fd
-    pkgs.emacs
+    #pkgs.emacs
     pkgs.tmux
+    pkgs.tree
   ];
 
   home.file.".tmux.conf".source = ./tmux.conf;
@@ -151,7 +152,7 @@
   };
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    # enableAutosuggestions = true;
     enableCompletion = true;
     defaultKeymap = "emacs";
     initExtra = ''
@@ -170,7 +171,7 @@
       fi
     }
     setopt prompt_subst
-    prompt='%F{39}Puget: %F{120}%~%f$(git_branch_name) \$ '
+    prompt='%F{39}Debian12VM: %F{120}%~%f$(git_branch_name) \$ '
 
     ### ssh into tmux
     if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
@@ -189,7 +190,7 @@
       ll="ls -lh";
       g="git";
       gs="git status";
-      gls="git log --stat --all";
+      gls="git log --stat --full-diff";
       gd="git diff";
       vim="nvim";
       vi="nvim";
