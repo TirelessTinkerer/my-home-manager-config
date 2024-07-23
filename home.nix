@@ -13,7 +13,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "22.11"; # Please read the comment before changing.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -39,12 +39,10 @@
     #pkgs.emacs
     pkgs.tmux
     pkgs.tree
+    pkgs.git
   ];
 
   home.file.".tmux.conf".source = ./tmux.conf;
-  # home.file.".bashrc".source = ./my_bash_rc;
-  # home.file.".config/nvim/init.vim".source = ./init.vim;
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -60,23 +58,29 @@
     # '';
   };
 
-  # You can also manage environment variables but you will have to manually
-  # source
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
   #
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   #
   # or
   #
-  #  /etc/profiles/per-user/zhiyuan-li/etc/profile.d/hm-session-vars.sh
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #
-  # if you don't want to manage your shell through Home Manager.
+  # or
+  #
+  #  /etc/profiles/per-user/zyli/etc/profile.d/hm-session-vars.sh
+  #
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -171,7 +175,7 @@
       fi
     }
     setopt prompt_subst
-    prompt='%F{39}Debian12VM: %F{120}%~%f$(git_branch_name) \$ '
+    prompt='%F{39}DebLXQT: %F{120}%~%f$(git_branch_name) \$ '
 
     ### ssh into tmux
     if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
