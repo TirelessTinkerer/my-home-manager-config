@@ -41,18 +41,6 @@
     pkgs.tree
     pkgs.git
     pkgs.keepassxc
-
-    # These are my experiments to use pip and venv in nix
-    pkgs.openssl
-    pkgs.zlib
-    pkgs.gcc-unwrapped
-    pkgs.stdenv.cc.cc.lib
-    pkgs.tk
-    pkgs.python311
-    pkgs.python311Packages.pip
-    pkgs.python311Packages.virtualenv
-    pkgs.python311Packages.tkinter
-    pkgs.pythonManylinuxPackages.manylinux2014Package
   ];
 
   home.file.".tmux.conf".source = ./tmux.conf;
@@ -85,7 +73,7 @@
   #
   # or
   #
-  #  /etc/profiles/per-user/zyli/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/user_name/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
     #EDITOR = "nvim";
@@ -197,8 +185,6 @@
       tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
     fi
 
-    #export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.lib.makeLibraryPath config.home.packages}";
-    #export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib";
     '';
     shellAliases = {
       ".."="cd ..";
