@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "zyli";
-  home.homeDirectory = "/home/zyli";
+  home.username = (builtins.getEnv "USER");
+  home.homeDirectory = (builtins.getEnv "HOME");
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -40,6 +40,19 @@
     pkgs.tmux
     pkgs.tree
     pkgs.git
+    pkgs.keepassxc
+
+    # These are my experiments to use pip and venv in nix
+    pkgs.openssl
+    pkgs.zlib
+    pkgs.gcc-unwrapped
+    pkgs.stdenv.cc.cc.lib
+    pkgs.tk
+    pkgs.python311
+    pkgs.python311Packages.pip
+    pkgs.python311Packages.virtualenv
+    pkgs.python311Packages.tkinter
+    pkgs.pythonManylinuxPackages.manylinux2014Package
   ];
 
   home.file.".tmux.conf".source = ./tmux.conf;
@@ -75,7 +88,9 @@
   #  /etc/profiles/per-user/zyli/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    #EDITOR = "nvim";
+    ## For some reason, EDITOR works but LD_LIBRARY_PATH doesn't work
+    #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
   };
 
   # Let Home Manager install and manage itself.
@@ -181,6 +196,9 @@
     if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
       tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
     fi
+
+    #export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.lib.makeLibraryPath config.home.packages}";
+    #export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib";
     '';
     shellAliases = {
       ".."="cd ..";

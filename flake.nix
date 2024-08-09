@@ -13,9 +13,10 @@
   outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
+      user = (builtins.getEnv "USER");
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."zyli" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
