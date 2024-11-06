@@ -38,6 +38,7 @@
     pkgs.fd
     pkgs.emacs
     pkgs.tmux
+    pkgs.tree
   ];
 
   home.file.".tmux.conf".source = ./tmux.conf;
@@ -83,41 +84,41 @@
     " Enable filetype plugins
     filetype plugin on
     filetype indent on
-    
+
     " Set to auto read when a file is changed from the outside
     set autoread
     au FocusGained,BufEnter * checktime
-    
+
     " Configure backspace so it acts as it should act
     set backspace=eol,start,indent
     "set whichwrap+=<,>,h,l
-    
+
     " Ignore case when searching
     "set ignorecase
-    
+
     " When searching try to be smart about cases
     "set smartcase
-    
+
     " Makes search act like search in modern browsers
     set incsearch
-    
+
     " For regular expressions turn magic on
     "set magic
-    
+
     " Show matching brackets when text indicator is over them
     set showmatch
     " How many tenths of a second to blink when matching brackets
     set mat=2
-    
+
     " Enable syntax highlighting
     syntax enable
-    
+
     " Set utf8 as standard encoding and en_US as the standard language
     set encoding=utf8
-    
+
     " Use Unix as the standard file type
     set ffs=unix,dos,mac
-    
+
     " Turn backup off, since most stuff is in SVN, git etc. anyway...
     set nobackup
     set nowritebackup
@@ -125,22 +126,22 @@
 
     " Use spaces instead of tabs
     set expandtab
-    
+
     " Be smart when using tabs ;)
     "set smarttab
-    
+
     " 1 tab == 4 spaces
     set shiftwidth=2
     set tabstop=2
     set softtabstop=2
-    
+
     set autoindent "Auto indent
     set smartindent "Smart indent
     set wrap "Wrap lines
-    
+
     " Return to last edit position when opening files (You want this!)
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-    
+
     set number
     '';
   };
@@ -151,7 +152,6 @@
   };
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
     enableCompletion = true;
     defaultKeymap = "emacs";
     initExtra = ''
@@ -186,13 +186,18 @@
       ".4"="cd ../../../..";
       ".5"="cd ../../../../..";
       ".6"="cd ../../../../../..";
-      ll="ls -lh";
+      ls="ls --color=auto -F"
+      ll="ls -lh --color=auto -F"  # Long format with human-readable file sizes
+      la="ls -lha --color=auto -F" # Show all files, including hidden, in long format
       g="git";
       gs="git status";
-      gls="git log --stat --all";
+      gls="git log --stat --full-diff";
       gd="git diff";
       vim="nvim";
       vi="nvim";
+      xvsim="~/driving/bin/x_view --high-rate-ino-map";
+      runsim="~/driving/src/tools/simian/local_cli_run.py";
+      lazyvim="NVIM_APPNAME=lazyvim nvim";
     };
   };
 }
